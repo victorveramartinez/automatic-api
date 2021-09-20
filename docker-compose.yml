@@ -1,0 +1,50 @@
+version: "3"
+services:
+    db:
+        image: postgres:latest
+        restart: always
+        environment: 
+            POSTGRES_DB: postgres
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: 123456
+        volumes:
+            - /home/victor/Documents/dev/docker/dockerVolumes:/var/lib/postgresql/9.6/data
+        ports:
+            - "5432:5432"
+        networks:
+            - postgres_network
+        links:
+            - "pgadmin"
+    pgadmin:
+        image: "dpage/pgadmin4"
+        container_name: "pgadmin4"
+        ports:
+            - "80:80"
+        networks:
+            - postgres_network
+        environment:
+            PGADMIN_DEFAULT_EMAIL: victorvera86@gmail.com
+            PGADMIN_DEFAULT_PASSWORD: 123456
+  #  backend:
+  #       image: backend
+  #       container_name: backend
+  #       build: ./backend
+  #       depends_on: 
+  #           - db
+  #       ports:
+  #           - "3000:3000"
+  #       networks:
+  #           - postgres_network    
+    #frontend:
+    #    image: frontend
+    #    container_name: frontend
+    #    build: ./frontend
+    #    depends_on: 
+    #        - backend
+    #    ports:
+    #        - "4200:4200"
+    #    networks:
+    #        - postgres_network
+networks:
+    postgres_network:
+        driver: bridge

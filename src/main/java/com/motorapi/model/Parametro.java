@@ -17,7 +17,7 @@ public class Parametro implements Serializable {
 	private String dato;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
+   // @Column(unique = true, nullable = false)
 	private Long id;
 
 	private String valor;
